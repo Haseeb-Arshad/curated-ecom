@@ -54,6 +54,11 @@
   background: var(--chip);
 }
 
+.viewMore {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: calc(var(--gutter) / 2);
+}
 
 .viewMore {
   display: flex;

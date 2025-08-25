@@ -4,7 +4,7 @@ import { useState, type JSX } from "react";
 import FilterChips, {
   type Category as ChipCategory,
 } from "../components/FilterChips";
-import ProductCard, { type Product } from "../components/ProductCard";
+
 import Footer from "../components/Footer";
 import styles from "./_index.module.css";
 import stylesHref from "./_index.module.css?url";
@@ -29,20 +29,7 @@ export async function loader() {
     "Personal",
     "Lifestyle",
   ];
-  const categories = [{ name: "All", count: 0 }, ...names.map((n) => ({ name: n, count: 0 }))];
-  const products: Product[] = Array.from({ length: 18 }).map((_, i) => {
-    const category = names[i % names.length];
-    const cat = categories.find((c) => c.name === category);
-    if (cat) cat.count += 1;
-    return {
-      id: String(i + 1),
-      name: `Placeholder Item ${i + 1}`,
-      brand: "Brand",
-      category,
-      image: "/images/placeholder.svg",
-    };
-  });
-  categories[0].count = products.length;
+
   return { categories, products };
 }
 
