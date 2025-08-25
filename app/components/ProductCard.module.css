@@ -1,17 +1,25 @@
 .card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
+  background: var(--panel);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-1);
+  padding: var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: calc(var(--gutter) / 2);
+  transition: box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
 }
 
 .img {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   object-fit: contain;
-  background-color: var(--color-border);
+  background: var(--line);
   filter: blur(20px);
   transition: filter var(--transition-base);
 }
@@ -24,11 +32,11 @@
   font-size: 0.875rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 0.25rem;
 }
 
 .brand {
-  color: var(--color-muted);
+  color: var(--muted);
 }
 
 .name {

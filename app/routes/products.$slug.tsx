@@ -1,17 +1,81 @@
-import { useParams } from "react-router";
-import type { Route } from "./+types/products.$slug";
+import { useLoaderData } from "react-router";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 
-export function meta({ params }: Route.MetaArgs) {
-  return [{ title: `Product ${params.slug}` }];
+export const meta: MetaFunction<typeof loader> = ({ data }) => [
+  { title: `${data?.name ?? "Product"} – Curated Design` },
+  { property: "og:type", content: "product" },
+  { property: "og:title", content: data?.name ?? "Product" },
+];
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  const product = {
+    id: params.slug || "1",
+    name: "Placeholder Product",
+    brand: "Brand",
+    category: "Tech",
+    image: "/images/placeholder.svg",
+    description: "Product description coming soon.",
+  };
+  return product;
 }
 
-export const links: Route.LinksFunction = () => [];
+export default function Product() {
+  const product = useLoaderData<typeof loader>();
 
-export default function ProductSlug() {
-  const { slug } = useParams();
+  const productLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    brand: product.brand,
+    category: product.category,
+    image: product.image,
+    description: product.description,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://curated.design/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: product.category,
+        item: `https://curated.design/categories/${product.category}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `https://curated.design/products/${product.id}`,
+      },
+    ],
+  };
+
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-semibold">Product: {slug}</h1>
-    </div>
+    <article className="container stack-md">
+      <h1>{product.name}</h1>
+      <img
+        src={product.image}
+        alt={product.name}
+        loading="lazy"
+        decoding="async"
+        style={{ maxWidth: "400px", aspectRatio: "1/1", objectFit: "contain" }}
+      />
+      <p>{product.description}</p>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+    </article>
   );
 }

@@ -1,15 +1,12 @@
-import type { Route } from "./+types/lists";
+import type { MetaFunction } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: "Lists" }];
-}
-
-export const links: Route.LinksFunction = () => [];
+export const meta: MetaFunction = () => [{ title: "Lists" }];
 
 export default function Lists() {
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-semibold">Lists</h1>
+    <div className="container stack-md">
+      <h1>Lists</h1>
+      <p>Curated product lists will appear here.</p>
     </div>
   );
 }

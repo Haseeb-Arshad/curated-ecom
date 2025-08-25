@@ -1,17 +1,16 @@
 import { useParams } from "react-router";
-import type { Route } from "./+types/brands.$slug";
+import type { MetaFunction } from "react-router";
 
-export function meta({ params }: Route.MetaArgs) {
-  return [{ title: `Brand ${params.slug}` }];
-}
-
-export const links: Route.LinksFunction = () => [];
+export const meta: MetaFunction = ({ params }) => [
+  { title: `Brand ${params.slug}` },
+];
 
 export default function BrandSlug() {
   const { slug } = useParams();
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-semibold">Brand: {slug}</h1>
+    <div className="container stack-md">
+      <h1>Brand: {slug}</h1>
+      <p>Brand details coming soon.</p>
     </div>
   );
 }

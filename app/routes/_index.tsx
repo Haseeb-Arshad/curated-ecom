@@ -1,18 +1,19 @@
 import { useLoaderData } from "react-router";
-import type { Route } from "./+types/_index";
+import type { LinksFunction, MetaFunction } from "react-router";
 import FilterChips from "../components/FilterChips";
 import ProductCard, { type Product } from "../components/ProductCard";
 import styles from "./_index.module.css";
+import stylesHref from "./_index.module.css?url";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Curated Design" },
-    {
-      name: "description",
-      content: "Discover well-designed, carefully curated products.",
-    },
-  ];
-}
+export const meta: MetaFunction = () => [
+  {
+    title: "Curated Design",
+  },
+  {
+    name: "description",
+    content: "Discover well-designed, carefully curated products.",
+  },
+];
 
 export async function loader() {
   const categories = [
@@ -35,6 +36,8 @@ export async function loader() {
   return { categories, products };
 }
 
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: stylesHref }];
+
 export default function Index() {
   const { categories, products } = useLoaderData<typeof loader>();
   return (
@@ -46,7 +49,7 @@ export default function Index() {
           across home, work, and life.
         </p>
         <form className={styles.subscribe} action="/subscribe" method="post">
-          <label htmlFor="email" className="sr-only">
+          <label htmlFor="email" className="visually-hidden">
             Email address
           </label>
           <input
