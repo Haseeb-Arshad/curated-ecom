@@ -49,31 +49,12 @@
 .subscribe button:focus-visible {
   background: var(--ink);
   color: var(--panel);
-}
 
-.viewMore {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: calc(var(--gutter) * 1.5);
-  font-size: 0.875rem;
-}
-
-.viewMore a {
-  color: var(--subtle);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color var(--transition-base);
-}
-
-.viewMore a:hover,
-.viewMore a:focus-visible {
-  color: var(--ink);
-}
 
 .grid {
   list-style: none;
   padding: 0;
-  margin: var(--gutter) 0 0;
+
   display: grid;
   gap: var(--gutter);
   grid-template-columns: 1fr;
