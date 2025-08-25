@@ -1,17 +1,16 @@
 import { useParams } from "react-router";
-import type { Route } from "./+types/categories.$slug";
+import type { MetaFunction } from "react-router";
 
-export function meta({ params }: Route.MetaArgs) {
-  return [{ title: `Category ${params.slug}` }];
-}
-
-export const links: Route.LinksFunction = () => [];
+export const meta: MetaFunction = ({ params }) => [
+  { title: `Category ${params.slug}` },
+];
 
 export default function CategorySlug() {
   const { slug } = useParams();
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-semibold">Category: {slug}</h1>
+    <div className="container stack-md">
+      <h1>Category: {slug}</h1>
+      <p>Category details coming soon.</p>
     </div>
   );
 }

@@ -1,84 +1,93 @@
 .wrapper {
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 0 var(--space-6);
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
 .hero {
   text-align: center;
-  margin-top: var(--space-16);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  margin-top: calc(var(--gutter) * 2);
 }
 
 .hero h1 {
-  font-size: 2rem;
-  line-height: 1.2;
+  margin-bottom: calc(var(--gutter) / 2);
 }
 
 .hero p {
-  color: var(--color-muted);
+  color: var(--subtle);
   max-width: 35rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .subscribe {
-  margin-top: var(--space-4);
+  margin-top: calc(var(--gutter) / 2);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: calc(var(--gutter) / 2);
   justify-content: center;
 }
 
 .subscribe input {
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
   min-width: 16rem;
+  background: var(--panel);
 }
 
 .subscribe button {
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
   border: none;
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+  border-radius: var(--radius-pill);
+  background: var(--brand);
+  color: var(--brand-ink);
   cursor: pointer;
   transition: background-color var(--transition-base);
 }
 
 .subscribe button:hover,
 .subscribe button:focus-visible {
-  background-color: var(--color-text);
+  background: var(--ink);
+  color: var(--panel);
 }
 
 .grid {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: calc(var(--gutter) * 1.5) 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-6);
+  gap: var(--gutter);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .moreWrapper {
   display: flex;
   justify-content: center;
-  margin-top: var(--space-8);
+  margin-top: var(--gutter);
 }
 
 .moreButton {
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--panel);
   cursor: pointer;
   transition: background-color var(--transition-base);
 }
 
 .moreButton:hover,
 .moreButton:focus-visible {
-  background-color: var(--color-border);
+  background: var(--chip);
 }

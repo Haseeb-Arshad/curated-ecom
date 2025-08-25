@@ -40,3 +40,14 @@
   /* Iconography */
   --icon-stroke: 1.5;
 }
+
+/* Dark mode (future) */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0F1216;
+    --panel: #1F2328;
+    --ink: #F5F5F5;
+  }
+}
+*/

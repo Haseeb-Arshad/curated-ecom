@@ -6,19 +6,26 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
 } from "react-router";
+import type { LinksFunction, MetaFunction } from "react-router";
+import AppShell from "./components/AppShell";
+import globalStylesHref from "./styles/globals.css?url";
 
-
-export const links: Route.LinksFunction = () => [
+export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+    crossOrigin: "anonymous",
+  },
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  { rel: "stylesheet", href: globalStylesHref },
   { rel: "canonical", href: "https://curated.design" },
 ];
 
-export const meta: Route.MetaFunction = () => [
+export const meta: MetaFunction = () => [
   { title: "Curated Design" },
   {
     name: "description",
@@ -33,37 +40,29 @@ export const meta: Route.MetaFunction = () => [
   { name: "twitter:card", content: "summary_large_image" },
 ];
 
-  export function Layout({ children }: { children: React.ReactNode }) {
-    return (
-      <html lang="en">
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-        <body>
-          <AppShell>{children}</AppShell>
-          <ScrollRestoration />
-          <Scripts />
-        </body>
-      </html>
-    );
-  }
-
-export default function App() {
-  return (
-    <>
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </>
+      <body>
+        <AppShell>{children}</AppShell>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
   );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+export default function App() {
+  return <Outlet />;
+}
+
+export function ErrorBoundary({ error }: { error: unknown }) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
@@ -80,7 +79,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main style={{ padding: "var(--space-16) var(--space-6)" }}>
+    <main
+      style={{
+        padding: `calc(var(--gutter) * 2) var(--gutter)`,
+      }}
+    >
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (
