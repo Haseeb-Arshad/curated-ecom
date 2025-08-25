@@ -19,37 +19,46 @@
   margin-inline: auto;
 }
 
+/* Newsletter form */
 .subscribe {
   margin-top: calc(var(--gutter) / 2);
   display: flex;
-  flex-wrap: wrap;
-  gap: calc(var(--gutter) / 2);
   justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  max-width: 28rem;
+  margin-inline: auto;
 }
 
 .subscribe input {
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  min-width: 16rem;
+  border: none;
   background: var(--panel);
+  flex: 1;
+  min-width: 16rem;
 }
 
 .subscribe button {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
-  color: var(--brand-ink);
+  border-left: 1px solid var(--line);
+  background: var(--panel);
   cursor: pointer;
   transition: background-color var(--transition-base);
 }
 
 .subscribe button:hover,
 .subscribe button:focus-visible {
-  background: var(--ink);
-  color: var(--panel);
+  background: var(--chip);
+}
 
+.viewMore {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: calc(var(--gutter) / 2);
+}
 
 .grid {
   list-style: none;
