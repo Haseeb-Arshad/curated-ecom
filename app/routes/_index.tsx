@@ -43,7 +43,9 @@ export default function Index() {
   return (
     <div className={styles.wrapper}>
       <section className={styles.hero}>
-        <h1>Discover well-designed, carefully curated products</h1>
+        <h1 className="display hero-headline">
+          Discover well-designed, carefully curated products
+        </h1>
         <p>
           Subscribe for occasional emails featuring timeless, design-led products
           across home, work, and life.
@@ -64,6 +66,9 @@ export default function Index() {
       </section>
       <FilterChips categories={categories} active="All" />
       <section>
+        <div className={styles.viewMore}>
+          <a href="/browse">View More</a>
+        </div>
         <ul className={styles.grid} role="list">
           {products.map((product) => (
             <li key={product.id}>

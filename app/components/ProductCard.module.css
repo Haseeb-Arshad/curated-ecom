@@ -1,4 +1,5 @@
 .card {
+
   background: var(--panel);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-1);
@@ -41,4 +42,28 @@
 
 .name {
   font-weight: 500;
+}
+
+.visit {
+  position: absolute;
+  top: var(--gutter);
+  right: var(--gutter);
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.visit:hover,
+.visit:focus-visible {
+  background: var(--chip);
+  color: var(--ink);
+  transform: scale(1.05);
 }

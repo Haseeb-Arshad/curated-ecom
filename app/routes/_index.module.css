@@ -49,12 +49,12 @@
 .subscribe button:focus-visible {
   background: var(--ink);
   color: var(--panel);
-}
+
 
 .grid {
   list-style: none;
   padding: 0;
-  margin: calc(var(--gutter) * 1.5) 0 0;
+
   display: grid;
   gap: var(--gutter);
   grid-template-columns: 1fr;
