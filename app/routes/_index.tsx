@@ -4,7 +4,7 @@ import { useState, type JSX } from "react";
 import FilterChips, {
   type Category as ChipCategory,
 } from "../components/FilterChips";
-import ProductCard from "../components/ProductCard";
+
 import Footer from "../components/Footer";
 import styles from "./_index.module.css";
 import stylesHref from "./_index.module.css?url";
@@ -20,7 +20,7 @@ export const meta: MetaFunction = () => [
 ];
 
 export async function loader() {
-  const { products } = await import("../data/products");
+
   const names = [
     "Tech",
     "Workspace",
@@ -30,13 +30,7 @@ export async function loader() {
     "Personal",
     "Lifestyle",
   ];
-  const categories = [
-    { name: "All", count: products.length },
-    ...names.map((name) => ({
-      name,
-      count: products.filter((p) => p.category === name).length,
-    })),
-  ];
+
   return { categories, products };
 }
 
