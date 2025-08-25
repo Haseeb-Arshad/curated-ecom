@@ -1,0 +1,25 @@
+.footer {
+  margin-top: var(--space-16);
+  padding: var(--space-8) var(--space-6);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.brand {
+  font-size: 1.5rem;
+}
+
+.copy {
+  margin-top: var(--space-4);
+  text-align: center;
+}
