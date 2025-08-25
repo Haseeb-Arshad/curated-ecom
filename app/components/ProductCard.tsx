@@ -35,7 +35,9 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className={styles.brand}>
           {product.brand} &ndash; {product.category}
         </p>
-        <h3 className={styles.name}>{product.name}</h3>
+        <h3 className={styles.name}>
+          <a href={`/products/${product.id}`}>{product.name}</a>
+        </h3>
       </div>
     </article>
   );

@@ -1,8 +1,8 @@
 .card {
-
+  position: relative;
   background: var(--panel);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-1);
+  border: 1px solid var(--line);
   padding: var(--gutter);
   display: flex;
   flex-direction: column;
@@ -57,8 +57,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--transition-base),
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base),
+    background-color var(--transition-base),
     transform var(--transition-base);
+}
+
+.card:hover .visit,
+.card:focus-within .visit {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .visit:hover,
