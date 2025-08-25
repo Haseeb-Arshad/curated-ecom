@@ -1,15 +1,12 @@
-import type { Route } from "./+types/taxonomy";
+import type { MetaFunction } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: "Taxonomy" }];
-}
-
-export const links: Route.LinksFunction = () => [];
+export const meta: MetaFunction = () => [{ title: "Taxonomy" }];
 
 export default function Taxonomy() {
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-semibold">Taxonomy</h1>
+    <div className="container stack-md">
+      <h1>Taxonomy</h1>
+      <p>Index of brands and categories.</p>
     </div>
   );
 }
