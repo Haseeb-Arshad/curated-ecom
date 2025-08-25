@@ -1,0 +1,84 @@
+.wrapper {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.hero {
+  text-align: center;
+  margin-top: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hero h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  color: var(--color-muted);
+  max-width: 35rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subscribe {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.subscribe input {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  min-width: 16rem;
+}
+
+.subscribe button {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: none;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.subscribe button:hover,
+.subscribe button:focus-visible {
+  background-color: var(--color-text);
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-6);
+}
+
+.moreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8);
+}
+
+.moreButton {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.moreButton:hover,
+.moreButton:focus-visible {
+  background-color: var(--color-border);
+}
