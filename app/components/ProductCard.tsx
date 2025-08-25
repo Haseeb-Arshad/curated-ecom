@@ -23,19 +23,24 @@ export default function ProductCard({ product }: { product: Product }) {
           <path d="M7 7h10v10" />
         </svg>
       </a>
-      <img
-        src={product.image}
-        alt={product.name}
-        loading="lazy"
-        decoding="async"
-        className={`${styles.img} ${loaded ? styles.imgLoaded : ""}`}
-        onLoad={() => setLoaded(true)}
-      />
+      <div className={styles.imgWrap}>
+        {!loaded && <div className={styles.skeleton} />}
+        <img
+          src={product.image}
+          alt={product.name}
+          loading="lazy"
+          decoding="async"
+          className={`${styles.img} ${loaded ? styles.imgLoaded : ""}`}
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
       <div className={styles.meta}>
         <p className={styles.brand}>
           {product.brand} &ndash; {product.category}
         </p>
-        <h3 className={styles.name}>{product.name}</h3>
+        <h3 className={styles.name}>
+          <a href={`/products/${product.id}`}>{product.name}</a>
+        </h3>
       </div>
     </article>
   );

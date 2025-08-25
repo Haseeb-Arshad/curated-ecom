@@ -1,0 +1,88 @@
+import type { Product } from "../components/ProductCard";
+
+export const products: Product[] = [
+  {
+    id: "wireless-earbuds",
+    name: "Wireless Earbuds",
+    brand: "Sonic",
+    category: "Tech",
+    image: "https://picsum.photos/seed/earbuds/600/600",
+  },
+  {
+    id: "mech-keyboard",
+    name: "Mechanical Keyboard",
+    brand: "KeyCo",
+    category: "Workspace",
+    image: "https://picsum.photos/seed/keyboard/600/600",
+  },
+  {
+    id: "desk-lamp",
+    name: "Desk Lamp",
+    brand: "Lumina",
+    category: "Home",
+    image: "https://picsum.photos/seed/lamp/600/600",
+  },
+  {
+    id: "leather-notebook",
+    name: "Leather Notebook",
+    brand: "NoteCo",
+    category: "Books",
+    image: "https://picsum.photos/seed/notebook/600/600",
+  },
+  {
+    id: "canvas-tote",
+    name: "Canvas Tote Bag",
+    brand: "CarryAll",
+    category: "Carry",
+    image: "https://picsum.photos/seed/tote/600/600",
+  },
+  {
+    id: "water-bottle",
+    name: "Water Bottle",
+    brand: "Hydrate",
+    category: "Personal",
+    image: "https://picsum.photos/seed/bottle/600/600",
+  },
+  {
+    id: "yoga-mat",
+    name: "Yoga Mat",
+    brand: "Zen",
+    category: "Lifestyle",
+    image: "https://picsum.photos/seed/yoga/600/600",
+  },
+  {
+    id: "headphones",
+    name: "Noise-Cancelling Headphones",
+    brand: "Sonic",
+    category: "Tech",
+    image: "https://picsum.photos/seed/headphones/600/600",
+  },
+  {
+    id: "monitor-stand",
+    name: "Monitor Stand",
+    brand: "DeskPro",
+    category: "Workspace",
+    image: "https://picsum.photos/seed/stand/600/600",
+  },
+  {
+    id: "scented-candle",
+    name: "Scented Candle",
+    brand: "Aroma",
+    category: "Home",
+    image: "https://picsum.photos/seed/candle/600/600",
+  },
+  {
+    id: "novel-book",
+    name: "Novel Book",
+    brand: "BookPub",
+    category: "Books",
+    image: "https://picsum.photos/seed/novel/600/600",
+  },
+  {
+    id: "travel-mug",
+    name: "Travel Mug",
+    brand: "CarryAll",
+    category: "Carry",
+    image: "https://picsum.photos/seed/mug/600/600",
+  },
+];
