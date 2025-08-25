@@ -20,7 +20,6 @@ export const meta: MetaFunction = () => [
 ];
 
 export async function loader() {
-
   const names = [
     "Tech",
     "Workspace",
