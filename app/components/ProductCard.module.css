@@ -16,17 +16,41 @@
   transform: translateY(-4px);
 }
 
-.img {
+.imgWrap {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
+  background: var(--panel);
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  background: var(--line);
-  filter: blur(20px);
-  transition: filter var(--transition-base);
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
 
 .imgLoaded {
-  filter: none;
+  opacity: 1;
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: var(--line);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .meta {

@@ -5,6 +5,7 @@ import FilterChips, {
   type Category as ChipCategory,
 } from "../components/FilterChips";
 import ProductCard, { type Product } from "../components/ProductCard";
+import Footer from "../components/Footer";
 import styles from "./_index.module.css";
 import stylesHref from "./_index.module.css?url";
 
@@ -106,7 +107,7 @@ export default function Index() {
     <div className={styles.wrapper}>
       <section className={styles.hero}>
         <h1 className="display hero-headline">
-          Discover well-designed, carefully curated products
+          Discover well-designed,<br /> carefully curated products
         </h1>
         <p>
           Subscribe for occasional emails featuring timeless, design-led products
@@ -150,6 +151,7 @@ export default function Index() {
           </div>
         )}
       </section>
+      <Footer />
     </div>
   );
 }
