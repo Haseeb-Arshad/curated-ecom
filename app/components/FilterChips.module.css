@@ -1,54 +1,168 @@
+.container {
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+}
+
 .chips {
   display: flex;
-  gap: calc(var(--gutter) / 2);
-  margin: var(--gutter) 0;
+  gap: 0.75rem;
   overflow-x: auto;
-  padding-bottom: 0.25rem;
+  padding: 0.25rem 0;
+  flex: 1 1 auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  background: var(--chip);
-  color: var(--chip-ink);
-  border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  padding: 0.25rem 0.75rem;
+  gap: 0.5rem;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid #e5e5e5;
+  border-radius: 50px;
+  padding: 0.5rem 0.875rem;
   font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  transform: scale(0.98);
-  opacity: 0.9;
-  transition: background-color var(--transition-base),
-    transform var(--transition-base),
-    opacity var(--transition-base),
-    border-color var(--transition-base);
+  white-space: nowrap;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
 }
 
-.chip:hover,
+.chip:hover {
+  background: #f9f9f9;
+  border-color: #d0d0d0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
 .chip:focus-visible {
-  transform: scale(1);
-  opacity: 1;
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .icon {
   display: inline-flex;
-  width: 1rem;
-  height: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
 }
 
 .icon svg {
-  width: 100%;
-  height: 100%;
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  stroke: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.chip:hover .icon svg {
+  opacity: 0.9;
+}
+
+.label {
+  white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 .count {
-  font-size: 0.75em;
-  opacity: 0.6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--subtle);
+  background: #f5f5f5;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.chip:hover .count {
+  background: #ebebeb;
+  color: var(--ink);
 }
 
 .active {
   font-weight: 600;
-  border-color: var(--ink);
+  background: #f0f0f0;
+  border-color: #c8c8c8;
   color: var(--ink);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.active:hover {
+  background: #ececec;
+  border-color: #b8b8b8;
+}
+
+.active .icon svg {
+  opacity: 1;
+}
+
+.active .count {
+  background: #e0e0e0;
+  color: var(--ink);
+}
+
+.action {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.action a,
+.action button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--subtle);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid #e5e5e5;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action a:hover,
+.action button:hover {
+  color: var(--ink);
+  background: var(--panel);
+  border-color: #d0d0d0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.action svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
 }

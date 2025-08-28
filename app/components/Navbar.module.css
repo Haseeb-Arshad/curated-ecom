@@ -1,10 +1,8 @@
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
+  position: static;
+  z-index: 1;
+  background: var(--bg);
+  border-bottom: none;
   animation: header-enter var(--transition-slow) ease-out both;
 }
 
@@ -41,6 +39,11 @@
   line-height: 1;
 }
 
+/* Make nav text slightly smaller and balanced */
+.menu {
+  font-weight: 500;
+}
+
 .menu {
   display: flex;
   gap: var(--gutter);
@@ -51,24 +54,26 @@
 
 .menu a {
   position: relative;
-  padding: 0.25rem 0;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base);
 }
 
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 1px;
-  background: currentColor;
-  transition: width var(--transition-base);
+.menu a:hover,
+.menu a:focus-visible {
+  background: var(--chip);
+  border-color: #ddd;
 }
 
-.menu a:hover::after,
-.menu a:focus-visible::after,
-.menu a.active::after {
-  width: 100%;
+.menu a.active {
+  background: var(--panel);
+  border-color: var(--line);
 }
 
 .search {
@@ -89,4 +94,14 @@
 .search:focus-visible {
   background: var(--chip);
   transform: scale(1.05);
+}
+
+/* Subtle item entrance when header mounts */
+[data-mounted="true"] .menu a {
+  animation: nav-pop var(--transition-slow) ease-out both;
+}
+
+@keyframes nav-pop {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }

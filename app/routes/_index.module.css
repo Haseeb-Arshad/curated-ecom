@@ -10,6 +10,10 @@
 }
 
 .hero h1 {
+  line-height: 1.15;
+}
+
+.hero h1 {
   margin-bottom: calc(var(--gutter) / 2);
 }
 
@@ -58,6 +62,10 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: calc(var(--gutter) / 2);
+}
+.viewMore a {
+  font-size: 0.9rem;
+  color: var(--subtle);
 }
 
 .viewMore {

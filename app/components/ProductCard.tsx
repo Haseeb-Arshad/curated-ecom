@@ -36,7 +36,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
       <div className={styles.meta}>
         <p className={styles.brand}>
-          {product.brand} &ndash; {product.category}
+          {product.brand} • {product.category}
         </p>
         <h3 className={styles.name}>
           <a href={`/products/${product.id}`}>{product.name}</a>

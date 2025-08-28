@@ -1,13 +1,11 @@
 import { useLoaderData } from "react-router";
 import type { LinksFunction, MetaFunction } from "react-router";
-import { useState, type JSX } from "react";
+import { useState, useMemo, type JSX } from "react";
 import FilterChips, {
   type Category as ChipCategory,
 } from "../components/FilterChips";
-
-import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
 import styles from "./_index.module.css";
-import stylesHref from "./_index.module.css?url";
 
 export const meta: MetaFunction = () => [
   {
@@ -20,6 +18,7 @@ export const meta: MetaFunction = () => [
 ];
 
 export async function loader() {
+  const { products } = await import("../data/products");
   const names = [
     "Tech",
     "Workspace",
@@ -29,14 +28,23 @@ export async function loader() {
     "Personal",
     "Lifestyle",
   ];
-
+  const categories = [
+    { name: "All", count: products.length },
+    ...names.map((name) => ({
+      name,
+      count: products.filter((p) => p.category === name).length,
+    })),
+  ];
   return { categories, products };
 }
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: stylesHref }];
+export const links: LinksFunction = () => [];
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [visible, setVisible] = useState(6);
+
   const icons: Record<string, JSX.Element> = {
     All: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -77,18 +85,50 @@ export default function Index() {
     ),
     Lifestyle: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3zm6 9 1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zM6 12l.75 2.25L9 15l-2.25.75L6 18l-.75-2.25L3 15l2.25-.75L6 12z" />
+        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3zm6 9l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zM6 12l.75 2.25L9 15l-2.25.75L6 18l-.75-2.25L3 15l2.25-.75L6 12z" />
       </svg>
     ),
   };
 
-  const categories: ChipCategory[] = data.categories.map((c) => ({
-    ...c,
-    icon: icons[c.name] || icons.All,
-  }));
+  // Filter products based on active category
+  const filteredProducts = useMemo(() => {
+    if (activeCategory === "All") {
+      return data.products;
+    }
+    return data.products.filter(p => p.category === activeCategory);
+  }, [activeCategory, data.products]);
 
-  const [visible, setVisible] = useState(6);
-  const products = data.products.slice(0, visible);
+  // Recalculate categories with updated counts based on filtered products
+  const categories: ChipCategory[] = useMemo(() => {
+    const names = [
+      "Tech",
+      "Workspace", 
+      "Home",
+      "Carry",
+      "Books",
+      "Personal",
+      "Lifestyle",
+    ];
+    return [
+      { 
+        name: "All", 
+        count: data.products.length,
+        icon: icons.All 
+      },
+      ...names.map((name) => ({
+        name,
+        count: data.products.filter((p) => p.category === name).length,
+        icon: icons[name] || icons.All,
+      })),
+    ];
+  }, [data.products, icons]);
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setVisible(6); // Reset visible count when changing category
+  };
+
+  const visibleProducts = filteredProducts.slice(0, visible);
 
   return (
     <div className={styles.wrapper}>
@@ -114,31 +154,40 @@ export default function Index() {
           <button type="submit">Subscribe</button>
         </form>
       </section>
-      <FilterChips categories={categories} active="All" />
+      <FilterChips
+        categories={categories}
+        active={activeCategory}
+        onCategoryChange={handleCategoryChange}
+        trailingAction={
+          <a href="/browse" aria-label="View more categories">
+            View More
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            </svg>
+          </a>
+        }
+      />
       <section>
-        <div className={styles.viewMore}>
-          <a href="/browse">View More</a>
-        </div>
         <ul className={styles.grid} role="list">
-          {products.map((product) => (
+          {visibleProducts.map((product) => (
             <li key={product.id}>
               <ProductCard product={product} />
             </li>
           ))}
         </ul>
-        {visible < data.products.length && (
+        {visible < filteredProducts.length && (
           <div className={styles.moreWrapper}>
             <button
               type="button"
               className={styles.moreButton}
               onClick={() => setVisible((v) => v + 6)}
+              aria-label={`Show more products (${filteredProducts.length - visible} remaining)`}
             >
               Show More
             </button>
           </div>
         )}
       </section>
-      <Footer />
     </div>
   );
 }
