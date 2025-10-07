@@ -95,30 +95,61 @@ export default function Index() {
     if (activeCategory === "All") {
       return data.products;
     }
+    // For now, "New" and "Picks" show all products
+    // In a real app, products would have metadata to filter by
+    if (activeCategory === "New" || activeCategory === "Picks") {
+      return data.products;
+    }
     return data.products.filter(p => p.category === activeCategory);
   }, [activeCategory, data.products]);
 
   // Recalculate categories with updated counts based on filtered products
   const categories: ChipCategory[] = useMemo(() => {
-    const names = [
-      "Tech",
-      "Workspace", 
-      "Home",
-      "Carry",
-      "Books",
-      "Personal",
-      "Lifestyle",
+    const categoryConfigs: Array<{
+      name: string;
+      badge?: "new" | "picks";
+    }> = [
+      { name: "Tech", badge: undefined },
+      { name: "Workspace", badge: undefined },
+      { name: "Home", badge: undefined },
+      { name: "Carry", badge: undefined },
+      { name: "Books", badge: undefined },
+      { name: "Personal", badge: undefined },
+      { name: "Lifestyle", badge: undefined },
     ];
+    
     return [
       { 
         name: "All", 
         count: data.products.length,
-        icon: icons.All 
+        icon: icons.All,
+        badge: undefined
       },
-      ...names.map((name) => ({
-        name,
-        count: data.products.filter((p) => p.category === name).length,
-        icon: icons[name] || icons.All,
+      { 
+        name: "New", 
+        count: 12,
+        icon: (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+        ),
+        badge: "new"
+      },
+      { 
+        name: "Picks", 
+        count: 8,
+        icon: (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        ),
+        badge: "picks"
+      },
+      ...categoryConfigs.map((config) => ({
+        name: config.name,
+        count: data.products.filter((p) => p.category === config.name).length,
+        icon: icons[config.name] || icons.All,
+        badge: config.badge,
       })),
     ];
   }, [data.products, icons]);

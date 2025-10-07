@@ -1,0 +1,51 @@
+/* Collection card: image scales on hover, container stays put */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.link {
+  display: grid;
+  grid-template-rows: auto auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ffffff; /* white stage as requested */
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.card:hover .img,
+.link:focus-visible .img {
+  transform: scale(1.06);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.count {
+  color: var(--muted);
+}
+

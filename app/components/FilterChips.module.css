@@ -1,7 +1,7 @@
 .container {
   width: 100%;
-  margin: 2rem 0;
-  padding: 0.5rem 0;
+  margin: 3rem 0 2.5rem;
+  padding: 0;
   position: relative;
 }
 
@@ -9,13 +9,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   position: relative;
 }
 
 .chips {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.625rem;
   overflow-x: auto;
   padding: 0.25rem 0;
   flex: 1 1 auto;
@@ -30,26 +30,27 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.375rem;
   background: var(--panel);
-  color: var(--ink);
-  border: 1px solid #e5e5e5;
-  border-radius: 50px;
-  padding: 0.5rem 0.875rem;
+  color: #404040;
+  border: 1px solid #e8e8e8;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  letter-spacing: -0.01em;
 }
 
 .chip:hover {
-  background: #f9f9f9;
-  border-color: #d0d0d0;
-  transform: translateY(-1px);
+  background: #fafafa;
+  border-color: #d4d4d4;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
 }
 
 .chip:focus-visible {
@@ -61,70 +62,67 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 
 .icon svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   fill: currentColor;
   stroke: none;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+  opacity: 0.6;
+  transition: opacity 0.18s ease;
 }
 
 .chip:hover .icon svg {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .label {
   white-space: nowrap;
   letter-spacing: -0.01em;
+  line-height: 1;
 }
 
 .count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1;
-  color: var(--subtle);
-  background: #f5f5f5;
-  border-radius: 10px;
-  transition: all 0.2s ease;
+  color: #737373;
+  margin-left: 0.125rem;
+  transition: color 0.18s ease;
 }
 
 .chip:hover .count {
-  background: #ebebeb;
-  color: var(--ink);
+  color: #525252;
 }
 
 .active {
   font-weight: 600;
-  background: #f0f0f0;
-  border-color: #c8c8c8;
-  color: var(--ink);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  background: #0F0F0F;
+  border-color: #0F0F0F;
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15);
 }
 
 .active:hover {
-  background: #ececec;
-  border-color: #b8b8b8;
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .active .icon svg {
-  opacity: 1;
+  opacity: 0.95;
 }
 
 .active .count {
-  background: #e0e0e0;
-  color: var(--ink);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.active:hover .count {
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .action {
@@ -137,32 +135,65 @@
 .action button {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1rem;
+  gap: 0.25rem;
+  padding: 0;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--subtle);
+  color: #737373;
   text-decoration: none;
   background: transparent;
-  border: 1px solid #e5e5e5;
-  border-radius: 50px;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.01em;
 }
 
 .action a:hover,
 .action button:hover {
-  color: var(--ink);
-  background: var(--panel);
-  border-color: #d0d0d0;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  color: #0F0F0F;
 }
 
 .action svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   stroke: currentColor;
-  stroke-width: 1.5;
+  stroke-width: 2;
   fill: none;
+}
+
+/* Badge styling for New and Picks */
+.badge {
+  display: none;
+}
+
+.new,
+.picks {
+  position: relative;
+}
+
+.new::after,
+.picks::after {
+  content: '';
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--panel);
+}
+
+.new::after {
+  background: #10b981;
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3);
+}
+
+.picks::after {
+  background: #f59e0b;
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3);
+}
+
+.active.new::after,
+.active.picks::after {
+  border-color: #0F0F0F;
 }

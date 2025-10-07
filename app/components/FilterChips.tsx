@@ -5,6 +5,7 @@ export interface Category {
   name: string;
   count: number;
   icon: ReactNode;
+  badge?: "new" | "picks";
 }
 
 export default function FilterChips({
@@ -26,7 +27,9 @@ export default function FilterChips({
             <button
               key={cat.name}
               type="button"
-              className={`${styles.chip} ${active === cat.name ? styles.active : ""}`}
+              className={`${styles.chip} ${active === cat.name ? styles.active : ""} ${
+                cat.badge ? styles[cat.badge] : ""
+              }`}
               aria-pressed={active === cat.name}
               onClick={() => onCategoryChange?.(cat.name)}
               aria-label={`Filter by ${cat.name}, ${cat.count} items`}
@@ -34,10 +37,15 @@ export default function FilterChips({
               <span className={styles.icon} aria-hidden="true">
                 {cat.icon}
               </span>
-              <span className={styles.label}>{cat.name}</span>
-              <span className={styles.count} aria-label={`${cat.count} products`}>
-                {cat.count}
+              <span className={styles.label}>
+                {cat.name}
+                <sup className={styles.count}>{cat.count}</sup>
               </span>
+              {cat.badge && (
+                <span className={styles.badge} aria-label={cat.badge}>
+                  {cat.badge === "new" ? "New" : "Picks"}
+                </span>
+              )}
             </button>
           ))}
         </nav>
