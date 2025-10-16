@@ -109,24 +109,24 @@ export default function Index() {
       name: string;
       badge?: "new" | "picks";
     }> = [
-      { name: "Tech", badge: undefined },
-      { name: "Workspace", badge: undefined },
-      { name: "Home", badge: undefined },
-      { name: "Carry", badge: undefined },
-      { name: "Books", badge: undefined },
-      { name: "Personal", badge: undefined },
-      { name: "Lifestyle", badge: undefined },
-    ];
-    
+        { name: "Tech", badge: undefined },
+        { name: "Workspace", badge: undefined },
+        { name: "Home", badge: undefined },
+        { name: "Carry", badge: undefined },
+        { name: "Books", badge: undefined },
+        { name: "Personal", badge: undefined },
+        { name: "Lifestyle", badge: undefined },
+      ];
+
     return [
-      { 
-        name: "All", 
+      {
+        name: "All",
         count: data.products.length,
         icon: icons.All,
         badge: undefined
       },
-      { 
-        name: "New", 
+      {
+        name: "New",
         count: 12,
         icon: (
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -135,8 +135,8 @@ export default function Index() {
         ),
         badge: "new"
       },
-      { 
-        name: "Picks", 
+      {
+        name: "Picks",
         count: 8,
         icon: (
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -164,9 +164,9 @@ export default function Index() {
   return (
     <div className={styles.wrapper}>
       <section className={styles.hero}>
-        <h1 className="display hero-headline">
+        <div className={styles.heroHeadline}>
           Discover well-designed,<br /> carefully curated products
-        </h1>
+        </div>
         <p>
           Subscribe for occasional emails featuring timeless, design-led products
           across home, work, and life.

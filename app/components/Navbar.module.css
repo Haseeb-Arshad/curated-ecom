@@ -17,6 +17,7 @@
     opacity: 0;
     transform: translateY(-4px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -46,7 +47,8 @@
 
 .menu {
   display: flex;
-  gap: var(--gutter);
+  gap: 0.5rem;
+  /* var(--gutter); */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -54,8 +56,8 @@
 
 .menu a {
   position: relative;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.95rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
   border-radius: var(--radius-pill);
   background: transparent;
   border: 1px solid transparent;
@@ -68,13 +70,20 @@
 .menu a:hover,
 .menu a:focus-visible {
   background: var(--chip);
-  border-color: #ddd;
+  /* border-color: #ddd; */
 }
 
 .menu a.active {
   background: var(--panel);
-  border-color: var(--line);
+  /* border-color: var(--line); */
 }
+
+.menu a.inactive {
+  color: #737373;
+  /* border-color: var(--line); */
+}
+
+
 
 .search {
   display: flex;
@@ -92,7 +101,8 @@
 
 .search:hover,
 .search:focus-visible {
-  background: var(--chip);
+  background: #ebebeb;
+  /* var(--chip); */
   transform: scale(1.05);
 }
 
@@ -102,6 +112,13 @@
 }
 
 @keyframes nav-pop {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -17,22 +17,22 @@ export default function Navbar() {
         </a>
         <ul className={styles.menu} role="list">
           <li>
-            <NavLink to="/" end className={({ isActive }) => (isActive ? styles.active : undefined)}>
+            <NavLink to="/" end className={({ isActive }) => (isActive ? styles.active : styles.inactive)}>
               Discover
             </NavLink>
           </li>
           <li>
-            <NavLink to="/browse" className={({ isActive }) => (isActive ? styles.active : undefined)}>
+            <NavLink to="/browse" className={({ isActive }) => (isActive ? styles.active : styles.inactive)}>
               Browse
             </NavLink>
           </li>
           <li>
-            <NavLink to="/blog" className={({ isActive }) => (isActive ? styles.active : undefined)}>
+            <NavLink to="/blog" className={({ isActive }) => (isActive ? styles.active : styles.inactive)}>
               Blog
             </NavLink>
           </li>
           <li>
-            <NavLink to="/info" className={({ isActive }) => (isActive ? styles.active : undefined)}>
+            <NavLink to="/info" className={({ isActive }) => (isActive ? styles.active : styles.inactive)}>
               Info
             </NavLink>
           </li>

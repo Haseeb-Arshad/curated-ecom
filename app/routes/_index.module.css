@@ -5,8 +5,20 @@
 }
 
 .hero {
+
+
+
+  /* font-family: var(--font-display); */
+  font-family: var(--font-sans);
   text-align: center;
   margin-top: calc(var(--gutter) * 2);
+}
+
+.heroHeadline {
+  /* font-family: var(--font-display); */
+  font-size: var(--fs-h1);
+  /* font-weight: 600; */
+
 }
 
 .hero h1 {
@@ -63,6 +75,7 @@
   justify-content: flex-end;
   margin-bottom: calc(var(--gutter) / 2);
 }
+
 .viewMore a {
   font-size: 0.9rem;
   color: var(--subtle);
