@@ -3,6 +3,8 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 export default [
   // Index route
   index("routes/_index.tsx"),
+  // Service worker route
+  route("sw.js", "routes/sw.js.tsx"),
   // Simple top-level routes
   route("browse", "routes/browse.tsx"),
   route("info", "routes/info.tsx"),

@@ -1,9 +1,11 @@
 import { NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
+import SearchModal from "./SearchModal";
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
@@ -37,13 +39,22 @@ export default function Navbar() {
             </NavLink>
           </li>
         </ul>
-        <button type="button" aria-label="Search" className={styles.search}>
+        <button 
+          type="button" 
+          aria-label="Search" 
+          className={styles.search}
+          onClick={() => setIsSearchOpen(true)}
+        >
           <svg viewBox="0 0 24 24" className="icon" aria-hidden="true">
             <circle cx="11" cy="11" r="7" />
             <path d="m16 16 5 5" />
           </svg>
         </button>
       </nav>
+      <SearchModal 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </header>
   );
 }
