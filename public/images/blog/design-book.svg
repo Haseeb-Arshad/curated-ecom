@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900" width="700" height="900">
+  <defs>
+    <radialGradient id="swirl" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="100%" stop-color="#d9d9d9"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#fff"/>
+  <rect x="180" y="100" width="340" height="700" rx="8" fill="#0F1216"/>
+  <path d="M420 360c0 60-60 70-90 90-35 22-60 60-60 100 0 40 20 70 60 70s80-30 100-70 20-80 0-110-10-80-10-100 20-40 40-40 40 20 40 40-10 40-20 60" fill="url(#swirl)"/>
+  <rect x="180" y="100" width="16" height="700" fill="#1a1a1a" opacity="0.9"/>
+</svg>

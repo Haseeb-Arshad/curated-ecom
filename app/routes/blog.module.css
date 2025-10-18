@@ -1,0 +1,173 @@
+/* Shared styles for blog index and posts to match the minimal reference UI */
+.wrapper {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.header {
+  margin-top: calc(var(--gutter) * 2);
+  margin-bottom: calc(var(--gutter) * 1.25);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 2.8vw + 1rem, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  color: var(--subtle);
+  max-width: 46rem;
+}
+
+/* Index grid */
+.grid {
+  display: grid;
+  gap: var(--gutter);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  display: grid;
+  grid-template-rows: minmax(260px, 1fr) auto auto;
+  gap: 0.5rem;
+}
+
+.media {
+  background: var(--panel);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-1);
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  aspect-ratio: 1.33 / 1; /* ~4:3 */
+}
+
+.media img, .media picture, .media svg { 
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.date {
+  color: var(--subtle);
+  font-size: 0.9rem;
+}
+
+.cardTitle {
+  font-size: clamp(1.1rem, 0.7vw + 0.95rem, 1.35rem);
+  line-height: 1.3;
+}
+
+.cardTitle a { text-decoration: none; }
+.cardTitle a:hover { text-decoration: underline; }
+
+/* Post page */
+.postHeader {
+  text-align: center;
+  margin-top: calc(var(--gutter) * 2);
+  max-width: 780px; /* tighter measure */
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.postTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 2.2vw + 1rem, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.meta {
+  display: inline-flex;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--subtle);
+  font-size: 0.95rem;
+}
+.meta .dot { width: 3px; height: 3px; background: currentColor; border-radius: 50%; display: inline-block; }
+.meta svg { width: 1.05em; height: 1.05em; vertical-align: -2px; opacity: 0.9; }
+
+.content {
+  max-width: 760px;
+  margin: calc(var(--gutter) * 1.25) auto 0;
+  padding-inline: var(--gutter);
+}
+
+.lead { color: #2b2b2b; }
+.lead p + p { margin-top: 0.6rem; }
+
+.section { margin-top: calc(var(--gutter) * 1.5); }
+.section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 0.8vw + 1rem, 1.6rem);
+}
+.figure {
+  background: var(--panel);
+  border-radius: 16px;
+  box-shadow: var(--shadow-1);
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+.figure img, .figure svg { width: 100%; height: auto; display: block; }
+
+.content p { margin-top: 0.75rem; }
+
+/* Products mentioned */
+.mentions {
+  max-width: 760px;
+  margin: calc(var(--gutter) * 2) auto 0;
+  padding-inline: var(--gutter);
+}
+.mentions h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 0.9vw + 1rem, 1.6rem);
+  margin-bottom: 0.75rem;
+}
+.mentionsList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.mentionItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.6rem 0.8rem;
+}
+.thumb {
+  width: 58px; height: 58px; border-radius: 10px; overflow: hidden; display: grid; place-items: center; background: #fff;
+}
+.thumb img, .thumb svg { width: 56px; height: 56px; object-fit: contain; }
+.mentionText { line-height: 1.2; }
+.mentionTitle { font-weight: 600; }
+.mentionBrand { color: var(--subtle); font-size: 0.95rem; }
+.arrow { color: #9ca3af; }
+
+/* More reads */
+.moreReads {
+  max-width: var(--max-width);
+  margin: calc(var(--gutter) * 2) auto 0;
+  padding-inline: var(--gutter);
+}
+.moreReads h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 0.9vw + 1rem, 1.6rem); margin-bottom: 0.75rem; }
+.moreGrid { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .moreGrid { grid-template-columns: repeat(3, 1fr); } }
+.moreCard { display: grid; grid-template-rows: minmax(240px, 1fr) auto auto; gap: 0.5rem; }
+.moreMedia { background: var(--panel); border-radius: var(--radius-card); box-shadow: var(--shadow-1); display: grid; place-items: center; padding: 1.25rem; aspect-ratio: 1.33/1; }
+.moreDate { color: var(--subtle); font-size: 0.9rem; }
+.moreTitle { font-size: 1rem; }
+.cardLink { text-decoration: none; }

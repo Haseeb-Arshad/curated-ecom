@@ -1,4 +1,4 @@
-import { type LoaderFunctionArgs } from '@react-router/node';
+import { type LoaderFunctionArgs } from 'react-router';
 import fs from 'fs';
 import path from 'path';
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import styles from "./SearchModal.module.css";
 
 interface SearchModalProps {
@@ -17,9 +18,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
+      if (e.key === "Escape") onClose();
     };
 
     if (isOpen) {
@@ -37,9 +36,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.modal} role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
         <div className={styles.searchContainer}>
           <div className={styles.searchInputWrapper}>
             <svg className={styles.searchIcon} viewBox="0 0 24 24" aria-hidden="true">
@@ -49,13 +48,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             <input
               ref={inputRef}
               type="text"
-              placeholder="Search..."
+placeholder="Search …"
               className={styles.searchInput}
               autoComplete="off"
+              aria-label="Search"
             />
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
