@@ -21,10 +21,10 @@ export type BlogPost = {
   mentions?: Mention[];
 };
 
-// Utility to format date as "12 Oct 2025"
+// Utility to format date as "19 Oct 2025"
 export function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(undefined, {
-    day: "2-digit",
+  return new Date(date).toLocaleDateString("en-GB", {
+    day: "numeric",
     month: "short",
     year: "numeric",
   });
@@ -41,77 +41,85 @@ export function readingTimeMinutes(words: number, wpm = 160) {
 
 export const posts: BlogPost[] = [
   {
-    slug: "5-audio-products-that-sound-as-good-as-they-look",
-    title: "5 audio products that sound as good as they look",
-    date: "2025-10-12",
+    slug: "best-minimalist-leather-wallets-worth-buying",
+    title: "Best minimalist leather wallets worth buying",
+    date: "2025-10-20",
     excerpt:
-      "Sound is more than what we hear. It shapes how we move, focus, and inhabit a space. When design and technology meet with care, audio devices become more than tools.",
-    coverImage: "/images/blog/transparent-speaker.svg",
+      "Slim profiles, quality leather, and considered details. These wallets get out of the way and age beautifully.",
+    coverImage: "/images/blog/wallet.png", // provide this PNG in public/images/blog
     sections: [
       {
-        heading: "Transparent Speaker",
-        image: "/images/blog/transparent-speaker.svg",
+        heading: "Why minimal wallets win",
+        image: "/images/blog/wallet.png",
         body: [
-          "Built entirely from glass and aluminum, the Transparent Speaker takes honesty in design to its highest form.",
-          "Every wire, driver, and screw is visible, making its internal architecture part of the aesthetic. The result is a speaker that feels open and architectural, merging form and function with quiet precision.",
-          "Its sound signature is warm and balanced. The modular build allows for upgrades and repairs, extending its lifespan for decades.",
+          "A good minimalist wallet keeps bulk low without compromising on tactility or longevity.",
+          "Look for clean edges, durable stitching, and leather that develops character rather than wearing out.",
         ],
       },
+    ],
+  },
+  {
+    slug: "5-essential-accessories-for-your-new-iphone",
+    title: "5 essential accessories for your new iPhone",
+    date: "2025-10-19",
+    excerpt:
+      "A new iPhone deserves more than quick add-ons.\n\nThe right accessories refine how it fits into daily life, how it rests on a desk, and how it feels in hand. Each piece in this collection is made to last, shaped by material honesty and precision. Together they form a quiet system of accessories that extend function without adding noise.\n\nEvery object here shares a single quality: purpose. Whether crafted from leather, metal, or glass, these accessories offer a complete balance between protection, power, and simplicity. They are built to be used daily and kept for years, turning the iPhone into a calmer, more tactile part of life.\n\nThese are iPhone accessories built to be lived with, not replaced. They age, evolve, and adapt, proving that refinement comes from continuity rather than change.",
+    coverImage: "/images/blog/nomad-base-one-max.svg",
+    sections: [
       {
-        heading: "Beosound 2",
-        image: "/images/blog/beosound-2.svg",
+        heading: "Nomad Base One Max 3-in-1",
+        image: "/images/blog/nomad-base-one-max.svg",
         body: [
-          "A sculptural object that fills a room with 360° sound. Its tapered aluminum body eliminates visual bulk while projecting clear, even audio in every direction.",
-          "Touch controls are intuitive and satisfying—the kind of interface you don't need to think about.",
-        ],
-      },
-      {
-        heading: "O1 Desk Audio",
-        image: "/images/blog/o1-desk-audio.svg",
-        body: [
-          "A stacked set of modules that celebrate dials and tactility. It's the rare audio system that feels just as considered off as it does on.",
+          "Machined from solid metal and finished with a polished glass charging surface, the Nomad Base One Max brings weight and presence to any workspace. It charges an iPhone, Apple Watch, and AirPods simultaneously through precise MagSafe alignment. The structure remains stable for one-handed use, and the weighted base keeps it firmly in place.",
         ],
       },
     ],
     mentions: [
-      { title: "P—1 Pepper Mill", brand: "Crust", image: "/images/mentions/pepper-mill.svg" },
-      { title: "Clock", brand: "Loftie", image: "/images/mentions/clock.svg" },
-      { title: "Scissors", brand: "HMM", image: "/images/mentions/scissors.svg" },
-      { title: "Recycler", brand: "Simplehuman", image: "/images/mentions/recycler.svg" },
-      { title: "Sync Dual", brand: "Typhur", image: "/images/mentions/sync-dual.svg" },
-    ],
-  },
-  {
-    slug: "5-aesthetic-charging-devices-that-could-belong-on-any-desk",
-    title:
-      "5 aesthetic charging devices that could belong on any desk",
-    date: "2025-10-09",
-    excerpt:
-      "Charging doesn’t have to be an eyesore. These designs prioritize material, proportion, and restraint to blend into thoughtful workspaces.",
-    coverImage: "/images/blog/o1-desk-audio.svg",
-    sections: [
       {
-        heading: "Magnetic charging puck",
-        image: "/images/blog/o1-desk-audio.svg",
-        body: [
-          "A compact, architectural puck with an anodized finish and a soft cable that stays out of the way.",
-        ],
+        title: "Base One Max 3-in-1",
+        brand: "Nomad",
+        image: "/images/mentions/charging-base.svg",
+        href: "#",
+      },
+      {
+        title: "121 MagSafe Pebbled Leather Case",
+        brand: "Grams28",
+        image: "/images/mentions/phone-case.svg",
+        href: "#",
+      },
+      {
+        title: "Magnetic Leather Card Holder",
+        brand: "Elago",
+        image: "/images/mentions/card-holder.svg",
+        href: "#",
+      },
+      {
+        title: "Modern Leather Case",
+        brand: "Nomad",
+        image: "/images/mentions/leather-case.svg",
+        href: "#",
+      },
+      {
+        title: "iRoiClassic Power Bank | Magnetic",
+        brand: "Native Union",
+        image: "/images/mentions/power-bank.svg",
+        href: "#",
       },
     ],
   },
   {
-    slug: "5-coffee-table-books-every-home-should-have",
-    title: "5 coffee table books every home should have",
-    date: "2025-10-08",
+    slug: "the-best-minimalist-pc-cases-no-rgb-all-class",
+    title: "The best minimalist PC cases: No RGB, all class",
+    date: "2025-10-18",
     excerpt:
-      "Books are the easiest way to add texture and point of view to a space. These titles reward slow afternoons and curious hands.",
-    coverImage: "/images/blog/design-book.svg",
+      "For rigs that favor airflow, materials, and proportion over flashing lights.",
+    coverImage: "/images/blog/fractal-north.png", // provide this PNG in public/images/blog
     sections: [
       {
-        heading: "The Design Book",
-        image: "/images/blog/design-book.svg",
+        heading: "Why they stand out",
+        image: "/images/blog/fractal-north.png",
         body: [
-          "A compact tour through iconic objects—sharp, informative, and timeless.",
+          "Warmer materials and clean geometry keep builds timeless without compromising thermals.",
         ],
       },
     ],

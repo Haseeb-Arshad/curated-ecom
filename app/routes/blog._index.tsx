@@ -1,6 +1,7 @@
-import { Link, type MetaFunction } from "react-router";
+import { type MetaFunction } from "react-router";
 import styles from "./blog.module.css";
-import { getAllPosts, formatDate } from "../data/blog";
+import { getAllPosts } from "../data/blog";
+import BlogCard from "../components/BlogCard";
 
 export const meta: MetaFunction = () => [{ title: "Blog" }];
 
@@ -10,31 +11,27 @@ export async function loader() {
 }
 
 export default function BlogIndex() {
-  // Since blog data is static, we can import directly without useLoaderData
-  const { posts } = { posts: getAllPosts() };
-  return (
-    <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Blog</h1>
-        <p className={styles.subtitle}>
-          Reviews, lists and everything in between about the products we love.
-        </p>
-      </header>
+  // Blog data is static, so we can import it synchronously
+  const posts = getAllPosts();
 
-      <ul className={styles.grid} role="list">
-        {posts.map((post) => (
-          <li key={post.slug} className={styles.card}>
-            <Link to={`/blog/${post.slug}`} aria-label={post.title} className={styles.media}>
-              {/* eslint-disable-next-line jsx-a11y/alt-text */}
-              <img src={post.coverImage} alt="" loading="lazy" />
-            </Link>
-            <div className={styles.date}>{formatDate(post.date)}</div>
-            <h2 className={styles.cardTitle}>
-              <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-            </h2>
-          </li>
-        ))}
-      </ul>
-    </div>
+  return (
+    <section className={styles.page} aria-labelledby="blog-heading">
+      <div className={styles.wrapper}>
+        <header className={styles.header}>
+          <h1 id="blog-heading" className={styles.title}>
+            Blog
+          </h1>
+          <p className={styles.subtitle}>
+            Reviews, lists and everything in between about the products we love.
+          </p>
+        </header>
+
+        <ul className={styles.grid} role="list">
+          {posts.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
