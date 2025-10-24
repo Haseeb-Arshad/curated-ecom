@@ -85,7 +85,7 @@ export default function BlogPost() {
           <ul className={styles.mentionsList} role="list">
             {post.mentions.map((m) => (
               <li key={m.title}>
-                <a className={styles.mentionItem} href={m.href || "#"}>
+                <a className={styles.mentionItem} href={m.href || "#"} target="_blank" rel="noopener noreferrer">
                   <span className={styles.thumb}>
                     {/* eslint-disable-next-line jsx-a11y/alt-text */}
                     <img src={m.image} alt="" loading="lazy" />

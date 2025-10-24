@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import styles from "./ProductCard.module.css";
 
 export interface Product {
@@ -12,6 +12,35 @@ export interface Product {
 
 export default function ProductCard({ product }: { product: Product }) {
   const [loaded, setLoaded] = useState(false);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const placeholderSrc = "/images/placeholder.svg";
+
+  useEffect(() => {
+    const img = imageRef.current;
+    if (!img) {
+      setLoaded(false);
+      return;
+    }
+
+    if (img.complete && img.naturalWidth > 0) {
+      setLoaded(true);
+    } else {
+      setLoaded(false);
+    }
+  }, [product.image]);
+
+  const handleImageError = (event: SyntheticEvent<HTMLImageElement>) => {
+    const target = event.currentTarget;
+
+    if (target.src.endsWith(placeholderSrc)) {
+      setLoaded(true);
+      return;
+    }
+
+    setLoaded(false);
+    target.src = placeholderSrc;
+  };
+
   return (
     <article className={styles.card}>
       {product.badge && (
@@ -25,35 +54,33 @@ export default function ProductCard({ product }: { product: Product }) {
           <span>{product.badge === "staff-pick" ? "Staff Pick" : "Featured"}</span>
         </div>
       )}
-      <a
-        href={`/products/${product.id}`}
-        aria-label={`View ${product.name}`}
-        className={styles.visit}
-      >
-        <svg viewBox="0 0 24 24" className="icon" aria-hidden="true">
-          <path d="M7 17 17 7" />
-          <path d="M7 7h10v10" />
-        </svg>
+      <a href={`/products/${product.id}`} className={styles.linkArea}>
+        <div className={styles.imgWrap}>
+          {!loaded && <div className={styles.skeleton} aria-hidden="true" />}
+          <img
+            ref={imageRef}
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            decoding="async"
+            className={`${styles.img} ${loaded ? styles.imgLoaded : ""}`}
+            onLoad={() => setLoaded(true)}
+            onError={handleImageError}
+          />
+        </div>
+        <span className={styles.visit} aria-hidden="true">
+          <svg viewBox="0 0 24 24" className="icon">
+            <path d="M7 17 17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </span>
+        <div className={styles.meta}>
+          <p className={styles.brand}>
+            {product.brand} - {product.category}
+          </p>
+          <h3 className={styles.name}>{product.name}</h3>
+        </div>
       </a>
-      <div className={styles.imgWrap}>
-        {!loaded && <div className={styles.skeleton} />}
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          decoding="async"
-          className={`${styles.img} ${loaded ? styles.imgLoaded : ""}`}
-          onLoad={() => setLoaded(true)}
-        />
-      </div>
-      <div className={styles.meta}>
-        <p className={styles.brand}>
-          {product.brand} • {product.category}
-        </p>
-        <h3 className={styles.name}>
-          <a href={`/products/${product.id}`}>{product.name}</a>
-        </h3>
-      </div>
     </article>
   );
 }

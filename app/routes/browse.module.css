@@ -3,6 +3,8 @@
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
+  padding-right: var(--gutter-lg);
+  padding-left: var(--gutter-lg);
 }
 
 .header {
@@ -62,4 +64,3 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
-

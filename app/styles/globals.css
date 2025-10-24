@@ -95,6 +95,8 @@ h2,
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--gutter);
+  padding-right: var(--gutter-lg);
+  padding-left: var(--gutter-lg);
 }
 
 .stack-sm {

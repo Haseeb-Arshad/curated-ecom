@@ -63,12 +63,12 @@ export const posts: BlogPost[] = [
     title: "5 essential accessories for your new iPhone",
     date: "2025-10-19",
     excerpt:
-      "A new iPhone deserves more than quick add-ons.\n\nThe right accessories refine how it fits into daily life, how it rests on a desk, and how it feels in hand. Each piece in this collection is made to last, shaped by material honesty and precision. Together they form a quiet system of accessories that extend function without adding noise.\n\nEvery object here shares a single quality: purpose. Whether crafted from leather, metal, or glass, these accessories offer a complete balance between protection, power, and simplicity. They are built to be used daily and kept for years, turning the iPhone into a calmer, more tactile part of life.\n\nThese are iPhone accessories built to be lived with, not replaced. They age, evolve, and adapt, proving that refinement comes from continuity rather than change.",
-    coverImage: "/images/blog/nomad-base-one-max.svg",
+      "A new iPhone deserves more than quick add-ons.\n\nThe right accessories refine how it fits into daily life, how it rests on a desk, and how it feels in hand. Each piece in this collection is made to last, shaped by material honesty and precision. Together they form a quiet system of accessories that extend function without adding noise.\n\nEvery object here shares a single quality: purpose. Whether crafted from leather, metal, or glass, these accessories offer a complete balance between protection, power, and simplicity. They are built to be used daily and kept for years, turning the iPhone into a calmer, more tactile part of life.",
+    coverImage: "/images/Analogue_Pocket.png",
     sections: [
       {
         heading: "Nomad Base One Max 3-in-1",
-        image: "/images/blog/nomad-base-one-max.svg",
+        image: "/images/Analogue_Pocket.png",
         body: [
           "Machined from solid metal and finished with a polished glass charging surface, the Nomad Base One Max brings weight and presence to any workspace. It charges an iPhone, Apple Watch, and AirPods simultaneously through precise MagSafe alignment. The structure remains stable for one-handed use, and the weighted base keeps it firmly in place.",
         ],
@@ -78,32 +78,32 @@ export const posts: BlogPost[] = [
       {
         title: "Base One Max 3-in-1",
         brand: "Nomad",
-        image: "/images/mentions/charging-base.svg",
-        href: "#",
+        image: "/images/Analogue_Pocket.png",
+        href: "https://amazon.com/dp/B08N5WRWNW",
       },
       {
         title: "121 MagSafe Pebbled Leather Case",
         brand: "Grams28",
-        image: "/images/mentions/phone-case.svg",
-        href: "#",
+        image: "/images/fellow_stagg.png",
+        href: "https://amazon.com/dp/B09JQJQJQJ",
       },
       {
         title: "Magnetic Leather Card Holder",
         brand: "Elago",
-        image: "/images/mentions/card-holder.svg",
-        href: "#",
+        image: "/images/Void_V02MKII.png",
+        href: "https://amazon.com/dp/B08XQXQXQX",
       },
       {
         title: "Modern Leather Case",
         brand: "Nomad",
-        image: "/images/mentions/leather-case.svg",
-        href: "#",
+        image: "/images/Grau_Salt.png",
+        href: "https://amazon.com/dp/B09XYXYXYX",
       },
       {
         title: "iRoiClassic Power Bank | Magnetic",
         brand: "Native Union",
-        image: "/images/mentions/power-bank.svg",
-        href: "#",
+        image: "/images/Xiaomi Cordless Drill.png",
+        href: "https://amazon.com/dp/B08ZQZQZQZ",
       },
     ],
   },
