@@ -13,34 +13,63 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 ];
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const { products } = await import("../data/products");
   const slug = params.slug ?? "";
+  // Try backend first
+  try {
+    // eslint-disable-next-line no-undef
+    const base = (import.meta as any).env?.VITE_API_BASE_URL as string | undefined;
+    if (base) {
+      const res = await fetch(`${base}/api/products/${slug}`);
+      if (res.ok) {
+        const d = await res.json();
+        const img = Array.isArray(d.images) && d.images.length > 0 ? d.images[0].url : "/images/placeholder.svg";
+        const product = {
+          id: d.id,
+          name: d.name,
+          brand: d.brand ?? "",
+          category: d.category ?? "",
+          image: img,
+          badge: undefined as const,
+          description: d.description ?? "",
+          redirect_url: d.redirect_url as string | null,
+          brand_slug: d.brand_slug as string | undefined,
+          category_slug: d.category_slug as string | undefined,
+        };
+        // Related: by category from backend
+        let related: Array<{id:string; name:string; brand:string; category:string; image:string; badge?:"staff-pick"|"featured"}> = [];
+        if (product.category_slug) {
+          const r = await fetch(`${base}/api/products?category=${encodeURIComponent(product.category_slug)}&limit=9`);
+          if (r.ok) {
+            const body = await r.json();
+            related = (body.items as any[]).filter(p => p.id !== product.id).map(p => ({
+              id: p.id,
+              name: p.name,
+              brand: p.brand ?? "",
+              category: p.category ?? "",
+              image: p.image ?? "/images/placeholder.svg",
+            }));
+          }
+        }
+        return {
+          product,
+          related,
+          brandSlug: product.brand_slug ?? slugify(product.brand),
+          categorySlug: product.category_slug ?? slugify(product.category),
+        };
+      }
+    }
+  } catch {
+    // ignore
+  }
+
+  // Fallback to local static data
+  const { products } = await import("../data/products");
   const product =
     products.find((p) => p.id === slug) ||
-    ({
-      id: slug || "placeholder",
-      name: "Placeholder Product",
-      brand: "Brand",
-      category: "Home",
-      image: "/images/placeholder.svg",
-      badge: undefined,
-    } as const);
-
-  const related = products.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  );
-
-  // Lightweight, generic copy to mirror the reference page
-  const description =
-    `A ${product.category.toLowerCase()} piece by ${product.brand}. Minimal, considered and built to last. ` +
-    `Use it anywhere — at home or work — to quietly elevate the space.`;
-
-  return {
-    product: { ...product, description },
-    related: related.slice(0, 9),
-    brandSlug: slugify(product.brand),
-    categorySlug: slugify(product.category),
-  };
+    ({ id: slug || "placeholder", name: "Placeholder Product", brand: "Brand", category: "Home", image: "/images/placeholder.svg", badge: undefined } as const);
+  const related = products.filter((p) => p.category === product.category && p.id !== product.id);
+  const description = `A ${product.category.toLowerCase()} piece by ${product.brand}. Minimal, considered and built to last. Use it anywhere — at home or work — to quietly elevate the space.`;
+  return { product: { ...product, description }, related: related.slice(0, 9), brandSlug: slugify(product.brand), categorySlug: slugify(product.category) };
 }
 
 export default function Product() {
@@ -90,7 +119,7 @@ export default function Product() {
           <span aria-hidden>·</span>
           <a href={`/categories/${categorySlug}`}>{product.category}</a>
         </div>
-        <a href="#" className={styles.purchase}>
+        <a href={product.redirect_url || "#"} className={styles.purchase}>
           Purchase Link
           <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.arrow}>
             <path d="M7 17 17 7" />

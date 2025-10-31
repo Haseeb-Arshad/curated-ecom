@@ -76,15 +76,30 @@ app.get('/:slug', async (c) => {
     c.status(404);
     return c.json({ error: { message: 'Not found' } });
   }
+  // Try fetch active affiliate link
+  const aff = await supabasePublic
+    .from('affiliate_links')
+    .select('code, external_url, active')
+    .eq('product_id', data.id)
+    .eq('active', true)
+    .limit(1)
+    .maybeSingle();
+  const affiliate_code = aff.data?.code ?? null;
+  const purchase_url = aff.data?.external_url ?? null;
   return c.json({
     id: data.slug,
     name: data.title,
     brand: data.brands?.name ?? null,
+    brand_slug: data.brands?.slug ?? null,
     category: data.categories?.name ?? null,
+    category_slug: data.categories?.slug ?? null,
     images: (data.product_images || []).sort((a: any, b: any) => (a.sort ?? 0) - (b.sort ?? 0)),
     description: data.description,
     price_cents: data.price_cents,
     currency: data.currency,
+    affiliate_code,
+    purchase_url,
+    redirect_url: affiliate_code ? `/r/${affiliate_code}` : null,
   });
 });
 

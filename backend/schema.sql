@@ -62,6 +62,76 @@ create table if not exists public.affiliate_clicks (
   utm jsonb default '{}'
 );
 
+-- Reviews
+create table if not exists public.reviews (
+  id bigserial primary key,
+  product_id bigint references public.products(id) on delete cascade,
+  user_id uuid not null,
+  rating int not null check (rating between 1 and 5),
+  title text not null,
+  body text not null,
+  approved boolean default false,
+  created_at timestamptz default now()
+);
+
+-- Wishlists
+create table if not exists public.wishlists (
+  id bigserial primary key,
+  user_id uuid not null,
+  name text not null,
+  created_at timestamptz default now()
+);
+
+create table if not exists public.wishlist_items (
+  id bigserial primary key,
+  wishlist_id bigint references public.wishlists(id) on delete cascade,
+  product_id bigint references public.products(id) on delete cascade,
+  created_at timestamptz default now()
+);
+
+-- Cart & Orders
+create table if not exists public.carts (
+  id uuid primary key,
+  user_id uuid,
+  anon_id text,
+  status text not null default 'active' check (status in ('active','converted')),
+  created_at timestamptz default now()
+);
+
+create table if not exists public.cart_items (
+  id bigserial primary key,
+  cart_id uuid references public.carts(id) on delete cascade,
+  product_id bigint references public.products(id) on delete restrict,
+  variant_id bigint,
+  qty int not null check (qty > 0),
+  created_at timestamptz default now()
+);
+
+create table if not exists public.orders (
+  id bigserial primary key,
+  user_id uuid not null,
+  status text not null default 'pending_payment',
+  subtotal_cents int not null default 0,
+  shipping_cents int not null default 0,
+  tax_cents int not null default 0,
+  total_cents int not null default 0,
+  currency text not null default 'USD',
+  created_at timestamptz default now()
+);
+
+create table if not exists public.order_items (
+  id bigserial primary key,
+  order_id bigint references public.orders(id) on delete cascade,
+  product_id bigint references public.products(id) on delete restrict,
+  variant_id bigint,
+  qty int not null check (qty > 0),
+  unit_price_cents int not null
+);
+
+-- minimal RLS for public reads
+alter table public.reviews enable row level security;
+create policy if not exists public_reviews_read on public.reviews for select using (approved = true);
+
 alter table public.products enable row level security;
 create policy if not exists public_products_read on public.products for select using (published = true);
 

@@ -8,7 +8,25 @@ import styles from "./browse.module.css";
 export const meta: MetaFunction = () => [{ title: "Browse" }];
 
 export async function loader() {
-  const { lists, brands, categories } = await import("../data/browse");
+  const { lists, brands: localBrands, categories: localCategories } = await import("../data/browse");
+  let brands = localBrands;
+  let categories = localCategories;
+  try {
+    // eslint-disable-next-line no-undef
+    const base = (import.meta as any).env?.VITE_API_BASE_URL as string | undefined;
+    if (base) {
+      const [b, c] = await Promise.all([
+        fetch(`${base}/api/brands`).then(r => r.ok ? r.json() : Promise.reject()),
+        fetch(`${base}/api/categories`).then(r => r.ok ? r.json() : Promise.reject()),
+      ]);
+      if (Array.isArray(b.items)) {
+        brands = b.items.map((x: any) => ({ id: x.slug, name: x.name, image: "/images/placeholder.svg", count: 0, href: `/brands/${x.slug}` }));
+      }
+      if (Array.isArray(c.items)) {
+        categories = c.items.map((x: any) => ({ id: x.slug, name: x.name, image: "/images/placeholder.svg", count: 0, href: `/categories/${x.slug}` }));
+      }
+    }
+  } catch {}
   return { lists, brands, categories };
 }
 
