@@ -76,6 +76,7 @@ app.get('/:slug', async (c) => {
     c.status(404);
     return c.json({ error: { message: 'Not found' } });
   }
+  const d: any = data;
   // Try fetch active affiliate link
   const aff = await supabasePublic
     .from('affiliate_links')
@@ -87,16 +88,16 @@ app.get('/:slug', async (c) => {
   const affiliate_code = aff.data?.code ?? null;
   const purchase_url = aff.data?.external_url ?? null;
   return c.json({
-    id: data.slug,
-    name: data.title,
-    brand: data.brands?.name ?? null,
-    brand_slug: data.brands?.slug ?? null,
-    category: data.categories?.name ?? null,
-    category_slug: data.categories?.slug ?? null,
-    images: (data.product_images || []).sort((a: any, b: any) => (a.sort ?? 0) - (b.sort ?? 0)),
-    description: data.description,
-    price_cents: data.price_cents,
-    currency: data.currency,
+    id: d.slug,
+    name: d.title,
+    brand: d.brands?.name ?? null,
+    brand_slug: d.brands?.slug ?? null,
+    category: d.categories?.name ?? null,
+    category_slug: d.categories?.slug ?? null,
+    images: (d.product_images || []).sort((a: any, b: any) => (a.sort ?? 0) - (b.sort ?? 0)),
+    description: d.description,
+    price_cents: d.price_cents,
+    currency: d.currency,
     affiliate_code,
     purchase_url,
     redirect_url: affiliate_code ? `/r/${affiliate_code}` : null,

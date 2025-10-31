@@ -18,8 +18,8 @@ app.post('/checkout', async (c) => {
     .from('cart_items')
     .select('id, qty, products(id, price_cents, currency)')
     .eq('cart_id', cart.data.id);
-  const list = items.data ?? [];
-  const currency = list[0]?.products?.currency ?? 'USD';
+  const list: any[] = items.data ?? [];
+  const currency = (list[0]?.products?.currency) ?? 'USD';
   const subtotal = list.reduce((sum: number, it: any) => sum + (it.products?.price_cents ?? 0) * it.qty, 0);
   const tax = Math.round(subtotal * 0.0);
   const shipping = 0;

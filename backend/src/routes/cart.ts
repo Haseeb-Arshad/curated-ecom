@@ -12,7 +12,7 @@ async function getOrCreateCart(userId: string | null, anonId: string | null) {
   let query = client.from('carts').select('id').eq('status', 'active').limit(1);
   if (userId) query = query.eq('user_id', userId);
   else if (anonId) query = query.eq('anon_id', anonId);
-  const found = await query.single().catch(() => ({ data: null } as any));
+  const found = await query.maybeSingle();
   if (found?.data?.id) return { id: found.data.id };
   const newId = crypto.randomUUID();
   const insert = await client.from('carts').insert({ id: newId, user_id: userId, anon_id: userId ? null : anonId, status: 'active' }).select('id').single();
@@ -30,7 +30,7 @@ app.get('/', async (c) => {
   const cart = await getOrCreateCart(user?.sub ?? null, anonId);
   const { data } = await supabasePublic
     .from('cart_items')
-    .select('id, qty, products(slug,title,product_images(url,sort))')
+    .select('id, qty, products(slug,title,price_cents,currency,product_images(url,sort))')
     .eq('cart_id', cart.id);
   const items = (data ?? []).map((row: any) => ({
     id: row.id,
@@ -39,6 +39,8 @@ app.get('/', async (c) => {
       id: row.products?.slug,
       name: row.products?.title,
       image: (row.products?.product_images || []).sort((a: any,b: any)=>(a.sort??0)-(b.sort??0))[0]?.url,
+      price_cents: row.products?.price_cents,
+      currency: row.products?.currency,
     },
   }));
   return c.json({ id: cart.id, items });
