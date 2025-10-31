@@ -18,24 +18,44 @@ export const meta: MetaFunction = () => [
 ];
 
 export async function loader() {
-  const { products } = await import("../data/products");
-  const names = [
-    "Tech",
-    "Workspace",
-    "Home",
-    "Carry",
-    "Books",
-    "Personal",
-    "Lifestyle",
-  ];
+  // Try backend first; fall back to local static data
+  let items: Array<{ id: string; name: string; brand: string; category: string; image: string; badge?: "staff-pick" | "featured" }>
+    = [];
+  try {
+    // eslint-disable-next-line no-undef
+    const base = (import.meta as any).env?.VITE_API_BASE_URL as string | undefined;
+    if (base) {
+      const res = await fetch(`${base}/api/products?limit=48`);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.items)) {
+          items = data.items.map((p: any) => ({
+            id: String(p.id ?? p.slug ?? ""),
+            name: String(p.name ?? p.title ?? ""),
+            brand: String(p.brand ?? ""),
+            category: String(p.category ?? ""),
+            image: String(p.image ?? "/images/placeholder.svg"),
+          }));
+        }
+      }
+    }
+  } catch {
+    // ignore and fallback
+  }
+  if (items.length === 0) {
+    const local = await import("../data/products");
+    items = local.products;
+  }
+
+  const names = ["Tech", "Workspace", "Home", "Carry", "Books", "Personal", "Lifestyle"];
   const categories = [
-    { name: "All", count: products.length },
+    { name: "All", count: items.length },
     ...names.map((name) => ({
       name,
-      count: products.filter((p) => p.category === name).length,
+      count: items.filter((p) => p.category === name).length,
     })),
   ];
-  return { categories, products };
+  return { categories, products: items };
 }
 
 export const links: LinksFunction = () => [];
