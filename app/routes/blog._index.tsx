@@ -18,6 +18,14 @@ export default function BlogIndex() {
     <section className={styles.page} aria-labelledby="blog-heading">
       <div className={styles.wrapper}>
         <h1 id="blog-heading" className="visually-hidden">Blog</h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Blog</h1>
+          <p className={styles.subtitle}>
+            {/* Stay up to date with the latest news and updates from our team. */}
+            Reviews, lists and everything in between about the products we love.
+          </p>
+        </div>
+        {/* BLOG */}
 
         <ul className={styles.grid} role="list">
           {posts.map((post) => (

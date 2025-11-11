@@ -16,13 +16,14 @@ export default function BlogCard({ post }: BlogCardProps) {
           <img
             src={post.coverImage}
             alt=""
+            className={styles.coverImg}
             loading="lazy"
             decoding="async"
-            onError={(e) => {
-              const target = e.currentTarget as HTMLImageElement;
-              if (target.src.endsWith("placeholder.svg")) return;
-              target.src = "/images/placeholder.svg";
-            }}
+          // onError={(e) => {
+          //   const target = e.currentTarget as HTMLImageElement;
+          //   if (target.src.endsWith("placeholder.svg")) return;
+          //   target.src = "/images/placeholder.svg";
+          // }}
           />
         </div>
         <div className={styles.body}>

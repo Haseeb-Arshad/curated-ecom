@@ -6,44 +6,55 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.75rem, 1.2vw + 1.2rem, 2.25rem);
+  gap: clamp(1rem, 1.2vw + 1rem, 1.5rem);
   background: var(--panel);
-  border-radius: 28px;
-  padding: clamp(2.25rem, 2vw + 1.75rem, 2.8rem) clamp(2rem, 1.6vw + 1.5rem, 2.4rem) clamp(1.9rem, 1.4vw + 1.4rem, 2.3rem);
-  border: 1px solid rgba(15, 18, 22, 0.04);
-  box-shadow: 0 22px 48px rgba(15, 18, 22, 0.08);
+  border-radius: var(--radius-card);
+  padding: clamp(0.3rem, 1.6vw + 1rem, 1rem);
+  /* box-shadow: var(--shadow-1); */
   height: 100%;
   text-decoration: none;
-  transition:
-    transform var(--transition-base),
-    box-shadow var(--transition-base);
+  /* border: 1px solid red; */
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .card:hover,
 .card:focus-visible {
-  transform: translateY(-6px);
-  box-shadow: 0 28px 60px rgba(15, 18, 22, 0.1);
+  /* box-shadow: var(--shadow-hover); */
+
+}
+
+.coverImg {
+  transition: transform var(--transition-base);
+}
+
+
+.coverImg:hover {
+  transform: translateY(-4px);
 }
 
 .media {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   min-height: clamp(260px, 24vw, 320px);
+  padding: 1rem;
+  border-radius: calc(var(--radius-card) - 4px);
+  aspect-ratio: 4 / 3;
+  /* matches 'More reads' proportion */
 }
 
 .media img,
 .media picture,
 .media svg {
-  width: clamp(240px, 30vw, 340px);
-  height: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
   object-fit: contain;
 }
 
 .body {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.55rem;
   text-align: left;
 }
 
@@ -55,8 +66,8 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 0.6vw + 1.05rem, 1.35rem);
-  font-weight: 600;
+  font-size: clamp(0.8rem, 0.6vw + 1rem, 0.9rem);
+  font-weight: 400;
   letter-spacing: -0.015em;
-  line-height: 1.35;
+  line-height: 1.1;
 }
