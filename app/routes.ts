@@ -10,6 +10,7 @@ export default [
   route("info", "routes/info.tsx"),
   route("lists", "routes/lists.tsx"),
   route("taxonomy", "routes/taxonomy.tsx"),
+  route("test-backend", "routes/test-backend.tsx"),
   // Dynamic routes
   route("products/:slug", "routes/products.$slug.tsx"),
   route("brands/:slug", "routes/brands.$slug.tsx"),
